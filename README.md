@@ -53,3 +53,9 @@ support, you may be better off looking elsewhere.
 I really don't like the term "higher-half"; "negative-half" would make much more sense as that is
 essentially how the addresses are interpreted (i.e. as negative signed values rather than very high
 unsigned positive values). But, it's widely in use, so here we are.
+
+
+## License
+
+You are free to use this software, in source or compiled form, however you wish, though entirely
+at your own risk.

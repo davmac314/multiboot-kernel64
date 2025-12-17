@@ -75,7 +75,7 @@ void kernel_main(int mb_magic, struct multiboot_info *mb_info_ptr)
 
     // Make sure we have an EGA/VGA(like) text mode, and determine the frame address
     _Bool have_tm = 0;
-    char *tm;
+    volatile char *tm;
     uint16_t tm_pitch;
     
     // First, check "framebuffer" information
@@ -102,7 +102,7 @@ void kernel_main(int mb_magic, struct multiboot_info *mb_info_ptr)
         return;
     }
     
-    char *ss = tm;
+    volatile char *ss = tm;
     for (int i = 0; i < sizeof(msg1) - 1; i++) {
         *ss++ = msg1[i];
         *ss++ = 0x40;

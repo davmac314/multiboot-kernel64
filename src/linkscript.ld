@@ -87,25 +87,17 @@ SECTIONS
      * by the linker, automatically.
      */
 
-    /*
-     * For each of the following sections we calculate the "AT" address and save it in a variable
-     * before using it in the section definition. Using "." within AT does not seem to work (it
-     * always yields 0).
-     */
-
     . = . + hh_map_offset;
 
     . = ALIGN(ALIGNOF(NEXT_SECTION));
-    HIDDEN(kernel64_lma = . - hh_map_offset);
-    .text . : AT(kernel64_lma)
+    .text . : AT(ADDR(.text) - hh_map_offset)
     {
         *(.text)
         *(.text.*)
     }
 
     . = ALIGN(ALIGNOF(NEXT_SECTION));
-    HIDDEN(rodata_lma = . - hh_map_offset);
-    .rodata : AT(rodata_lma)
+    .rodata : AT(ADDR(.rodata) - hh_map_offset)
     {
         *(.rodata)
         *(.rodata.*)
@@ -113,8 +105,7 @@ SECTIONS
 
     . = ALIGN(0x1000);
     . = ALIGN(ALIGNOF(NEXT_SECTION));
-    HIDDEN(data_lma = . - hh_map_offset);
-    .data : AT(data_lma)
+    .data : AT(ADDR(.data) - hh_map_offset)
     {
         *(.data)
         *(.data.*)
